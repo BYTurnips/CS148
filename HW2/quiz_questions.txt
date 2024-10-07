@@ -1,34 +1,63 @@
 You will be randomly asked one of these questions during the grading session:
 
-What is the purpose of the aperture of a camera? How does a camera with aperture
+1. What is the purpose of the aperture of a camera? How does a camera with aperture
 differ from a pinhole camera? Which type of camera do we use to model the virtual
 world camera?
+    - Aperture controls how much light enters the camera by affecting the exposure
+    and depth of field. Larger aperture allows more light in and blrs the background,
+    whereas smaller does the opposite.
+    - Pinhole cameras do not have aperture, instead they use a small hole to allow
+    light in, which results in a very large depth of field but with everything in
+    focus. Aperture cameras can hence selectively focus.
+    - The Virtual World Camera models a camera with aperture to allow for realistic
+    simulation like depth of field.
 
 
-
-For which of the three geometric transformations – translation, rotation, and scaling
-– do we need homogeneous coordinates in order to represent it as a matrix operation?
-
-
-
-How do we apply homogeneous coordinates to composite multiple transformations (of
+2. For which of the three geometric transformations – translation, rotation, and scaling
+– do we need homogeneous coordinates in order to represent it as a matrix operation? How
+do we apply homogeneous coordinates to composite multiple transformations (of
 any of the three types) into 1 matrix operation?
+    - Only translation requires homogenous coordinates to represent translations as
+    matrix multiplication instead of addition.
+    - Homogenous coordinates help with multiple transformations by multiplying
+    the individual transformations, with the first transformation being the 
+    most right matrix multiplication, together into one composite transform.
 
 
-
-What are two reasons for why we often use triangle meshes to model our objects over
+3. What are two reasons for why we often use triangle meshes to model our objects over
 other polygonal meshes? Can you elaborate on one of these reasons?
+    - Triangles are the simplest polygons, meaning they can make up all other
+    polygons and model complex objects. 
+    - Furthermore, triangles are guaranteed to be planar and hence can be used to 
+    optimize/specialize upon. Transformations for example only need to be applied
+    to triangle vertices.
 
 
 
-Why does the order in which we specify the vertices of triangle face matter when it
+4. Why does the order in which we specify the vertices of triangle face matter when it
 comes to rendering? By convention, for which orientation of the vertices do we not
 render the triangle? And how do we deal with rendering overlapping triangles?
+    - The order in which we specify the vertices matters for rendering as it determines
+    whether the traingle is visible or facing away fromt he camera. 
+    - By convention, we use Counter-Clockwise orientation for triangles facing the
+    camera, and Clockwise for triangles facing away from the camera or more importantly,
+    triangles that will not render.
+    - For overlapping triangles, the rendering system uses screen space barycentric weight
+    interpolation and depth buffering (Z-buffering) to determine which triangle is in front.
+    The triangle with the smallest z' value (transformation value) colors the overlapping
+    pixel. 
 
 
-
-How does barycentric interpolation for triangles compare to linear interpolation for
+5. How does barycentric interpolation for triangles compare to linear interpolation for
 lines? Conceptually at a high level, what do the barycentric weights α1, α2, and α3
 represent for a triangle that is defined by points p1, p2, p3 and has a point p inside?
 (We want a high-level answer, not a description of any equations!)
+    - Linear interpolation essentially bestows a weight for a point to represent the 
+    fraction of distance between two end points. Baycentric interpolation extends upon 
+    this idea to two dimensions and leverages weights to the three verticies of a triangle
+    for representing a point's relational position, making baycentric interpolation more
+    complex and useful for representing a point's precise position across dimensions.
+    - Each weight represent the points' relation to the triangle endpoints/vertices, 
+    meaning that the point p is closer to the vertices with the highest weights. If all
+    weights were equal, the point p would be at the center of the triangle.
 
