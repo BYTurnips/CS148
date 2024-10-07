@@ -1,3 +1,13 @@
+Change GUI to rotate around the global origin.
+
+To make it rotate about the global axes, first go to the Object dropdown menu near the
+Object Mode indicator, then select Snap → Cursor to World Origin. If you’re in Edit Mode
+instead, then the option will be under the Mesh dropdown menu instead. Then, regardless of
+what mode you’re in, set the transform pivot in the dropdown menu next to the Global indicator
+to 3D Cursor . Now, if you use the rotate tool or the r keyboard shortcut, you’ll see the rotations
+go about the world origin.
+
+
 (a) rotate a cone about the x-axis by 45 deg, then rotate about the y-axis by 45 deg.
 
     R X 45 [Enter] R Y 45 [Enter]
