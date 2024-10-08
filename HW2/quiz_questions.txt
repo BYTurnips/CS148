@@ -9,8 +9,8 @@ world camera?
     - Pinhole cameras do not have aperture, instead they use a small hole to allow
     light in, which results in a very large depth of field but with everything in
     focus. Aperture cameras can hence selectively focus.
-    - The Virtual World Camera models a camera with aperture to allow for realistic
-    simulation like depth of field.
+    - The Virtual World Camera models a pinhole camera as a virtual camera can use 
+    a single point for the aperture.
 
 
 2. For which of the three geometric transformations – translation, rotation, and scaling
