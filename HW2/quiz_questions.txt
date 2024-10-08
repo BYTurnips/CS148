@@ -4,7 +4,7 @@ You will be randomly asked one of these questions during the grading session:
 differ from a pinhole camera? Which type of camera do we use to model the virtual
 world camera?
     - Aperture controls how much light enters the camera by affecting the exposure
-    and depth of field. Larger aperture allows more light in and blrs the background,
+    and depth of field. Larger aperture allows more light in and blurs the background,
     whereas smaller does the opposite.
     - Pinhole cameras do not have aperture, instead they use a small hole to allow
     light in, which results in a very large depth of field but with everything in
