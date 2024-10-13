@@ -235,9 +235,13 @@ def RT_trace_ray(scene, ray_orig, ray_dir, lights, depth=0):
         # Here n1 is the IOR of air, so n1 = 1
         # n2 is the IOR of the object, you can read it from the material property using: mat.ior
         # FILL IN YOUR CODE
-        # 
+        n1 = 1.0
+        n2 = mat.ior  # Get the IOR of the object from the material property
+        R_0 = ((n1 - n2) / (n1 + n2)) ** 2
+        
         # Calculate reflectivity k_r = R_0 + (1 - R_0) (1 - cos(theta))^5 where theta is the incident angle.
-        reflectivity = mat.mirror_reflectivity # REPLACE WITH YOUR CODE
+        cos_theta = abs(ray_dir.dot(hit_norm))
+        reflectivity = R_0 + (1 - R_0) * (1 - cos_theta) ** 5 # REPLACE WITH YOUR CODE
     #
     # Re-run this script, and render the scene to check your result with Checkpoint 5.
     # ----------
