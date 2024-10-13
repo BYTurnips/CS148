@@ -84,7 +84,7 @@ def RT_trace_ray(scene, ray_orig, ray_dir, lights, depth=0):
     # return initial color (black)
     if not has_hit:
         return color
-
+    
     # small offset to prevent self-occlusion for secondary rays
     eps = 1e-3
     # ray_cast returns the surface normal of the object geometry
@@ -188,11 +188,19 @@ def RT_trace_ray(scene, ray_orig, ray_dir, lights, depth=0):
         
         # Calculate diffuse component and add that to the pixel color
         #
-        color += np.array(diffuse_color) # REPLACE WITH YOUR CODE
+        I_diffuse = np.array(diffuse_color) * I_light * max(0.0, light_dir.dot(hit_norm))
+        color += np.array(I_diffuse) # REPLACE WITH YOUR CODE
         #
         # Re-run this script, and render the scene to check your result 
         # ----------
         # Calculate specular component and add that to the pixel color
+        view_dir = -ray_dir
+        half_vector = (light_dir + view_dir).normalized()
+
+        specular_intensity = max(0.0, hit_norm.dot(half_vector)) ** specular_hardness
+        I_specular = np.array(diffuse_color) * I_light * specular_intensity
+
+        color += np.array(I_specular)
         # FILL WITH YOUR CODE
         #
         # Re-run this script, and render the scene to check your result 
