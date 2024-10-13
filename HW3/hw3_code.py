@@ -254,9 +254,13 @@ def RT_trace_ray(scene, ray_orig, ray_dir, lights, depth=0):
         # Get the direction for reflection ray
         # D_reflect = D - 2 (D dot N) N
         # FILL IN YOUR CODE
+        D_reflect = ray_dir - 2 * ray_dir.dot(hit_norm) * hit_norm
+
+        epsilon = 1e-4
+        reflect_orig = hit_loc + epsilon * hit_norm
         
         # Recursively trace the reflected ray and store the return value as a color L_reflect
-        reflect_color = np.zeros(3) # REPLACE WITH YOUR CODE
+        reflect_color = RT_trace_ray(scene, reflect_orig, D_reflect, lights, depth - 1) # REPLACE WITH YOUR CODE
         
         # Add reflection to the final color: k_r * L_reflect
         color += reflectivity * reflect_color
