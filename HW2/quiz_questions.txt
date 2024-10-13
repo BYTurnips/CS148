@@ -27,7 +27,7 @@ any of the three types) into 1 matrix operation?
 3. What are two reasons for why we often use triangle meshes to model our objects over
 other polygonal meshes? Can you elaborate on one of these reasons?
     - Triangles are the simplest polygons, meaning they can make up all other
-    polygons and model complex objects. 
+    polygons and model complex objects.
     - Furthermore, triangles are guaranteed to be planar and hence can be used to 
     optimize/specialize upon. Transformations for example only need to be applied
     to triangle vertices.

@@ -1,0 +1,15 @@
+You will be randomly asked one of these questions during the grading session:
+
+ - Describe two of the ways we discussed in class on how to compute a ray-triangle
+intersection. You do not need to provide all the mathematical details. Just give
+enough of the high-level ideas to show that you understand the approaches.
+
+ - Why is transforming a normal vector between object and world space different from
+transforming an object between those spaces?
+
+ - Explain the idea of total internal reflection. Conceptually, when does this happen, and
+what effect does it have on the transmission of light through a material?
+
+ - What does Beer’s Law say about light as it travels through a medium? How does the
+attenuation coefficient come into play with modifying the light intensity appropriately
+as the light travels through some distance?
