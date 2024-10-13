@@ -218,7 +218,8 @@ def RT_trace_ray(scene, ray_orig, ray_dir, lights, depth=0):
     #
     # I_ambient = k_diffuse * k_ambient
     if no_light_hit:
-        color += np.zeros(3) # REPLACE WITH YOUR CODE
+        I_ambient = np.array(diffuse_color) * np.array(ambient_color)
+        color += I_ambient # REPLACE WITH YOUR CODE
     #
     # Re-run this script, and render the scene to check your result with Checkpoint 3.
     # ----------
