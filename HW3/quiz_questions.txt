@@ -17,7 +17,7 @@ enough of the high-level ideas to show that you understand the approaches.
 
  - Why is transforming a normal vector between object and world space different from
 transforming an object between those spaces?
-    -  an object space normal uses local axes of the object as its basis vectors but 
+    - An object space normal uses local axes of the object as its basis vectors but 
     in world space, the normal uses the world-space vectors as its basis. This is 
     because in world space, applying transformations will change an objects normal,
     so we need the normal vectors in world space coordinates.
