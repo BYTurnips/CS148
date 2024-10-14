@@ -1,15 +1,45 @@
 You will be randomly asked one of these questions during the grading session:
 
- - Describe two of the ways we discussed in class on how to compute a ray-triangle
+1. Describe two of the ways we discussed in class on how to compute a ray-triangle
 intersection. You do not need to provide all the mathematical details. Just give
 enough of the high-level ideas to show that you understand the approaches.
+    - Ray Plane intersection - see if the point of the ray lies in the 2 dimensional
+    region where triangle lies. This plane is not the image
+    plane but instead an a lower dimensional arbitrary plane where the point and the
+    triangle both lie. The 2D Rasterization Test will then validate if the point and
+    plane are intersecting (scan line rendering test, pixel to the left of all three 
+    rays).
+    - Ray Triangle intersection - Utilizing a 3D rendering of the triangle, we can take
+    a vector of one of the edges and construct a normal to that edge. Using a formula
+    for the ray point ((ray point - triangle vertex) dotted with n), we can find the
+    relation of the point to the triangle vertex and assess if it intersects via each
+    vertex.
 
  - Why is transforming a normal vector between object and world space different from
 transforming an object between those spaces?
+    - An object space normal uses local axes of the object as its basis vectors but 
+    in world space, the normal uses the world-space vectors as its basis. This is 
+    because in world space, applying transformations will change an objects normal,
+    so we need the normal vectors in world space coordinates.
 
  - Explain the idea of total internal reflection. Conceptually, when does this happen, and
 what effect does it have on the transmission of light through a material?
+    - This occurs when there is a transition from a higher refraction index (i.e. 
+    water/glass) to a lower refraction index (i.e. air).
+    - Normally, you get both a reflected and transmitted ray, but the transmitted ray 
+    disappears as you bend away from the normal and reach the critical angle, and makes
+    it so that no light can get through so you end up not being able to see anything
+    except the reflection.
+    - Effect: only reflection and no trasmitted ray.
+
 
  - What does Beer’s Law say about light as it travels through a medium? How does the
 attenuation coefficient come into play with modifying the light intensity appropriately
 as the light travels through some distance?
+    - Beer’s Law tells us that light gets absorbed and scattered over some distance 
+    as it travels through material, where the amount that gets scattered depends on the 
+    distance and the wavelength. The attenuation coefficient affects the light intensity 
+    by “pushing the light down,” so a larger attenuation coefficient would mean less light 
+    gets through (C is bigger for red light in water in comparison to green and blue, so 
+    you don’t see as much red in the water).
+
