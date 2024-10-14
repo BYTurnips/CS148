@@ -283,9 +283,22 @@ def RT_trace_ray(scene, ray_orig, ray_dir, lights, depth=0):
         # The IOR of the object is mat.ior, and the IOR of air is 1.
         # Continue only when the term under the square root in the D_transmit computation is positive.
         if mat.transmission > 0:
-            # FILL IN YOUR CODE
-                # Add transmission to the final color: (1 - k_r) * L_transmit
-                color += np.zeros(3) # REPLACE WITH YOUR CODE
+            n1 = mat.ior if ray_inside_object else 1.0
+            n2 = 1.0 if ray_inside_object else mat.ior
+
+            eta = n1/n2
+            cos_i = -hit_norm.dot(ray_dir)
+            sin_t2 = eta**2*(1.0-cosi**2)
+
+            if sin_t2 <= 1.0:
+                cos_t = np.sqrt(1.0-sin_t2)
+                D_transmit = eta*ray_dir * hit_norm(eta*cos_i-cos_t)
+
+                new_hit_loc = hit_lloc + D_transmit * eps
+
+                L_transmit = RT_trace_ray(scene, hit_loc, D_transmit, lights, depth-1)
+
+                color += (1-reflectivity) * mat.transmission * L_transmit
     #
     # Re-run this script, and render the scene to check your result with Checkpoint 6.
     # ----------
