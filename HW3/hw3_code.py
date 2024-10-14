@@ -272,20 +272,37 @@ def RT_trace_ray(scene, ray_orig, ray_dir, lights, depth=0):
         # Re-run this script, and render the scene to check your result with Checkpoint 4.
         # ----------
 
-        # ----------
-        # TODO 6: TRANSMISSION
-        #
-        # If depth > 0, then cast a transmitted ray from the current intersection point
-        # with direction D_transmit to get the color contribution of the ray L_transmit.
-        # Multiply that with (1 - k_r) * mat.transmission, and add the result to the pixel color.
-        #
-        # The ray goes from n1 media to n2 media so set n1 and n2 according to ray_inside_object.
-        # The IOR of the object is mat.ior, and the IOR of air is 1.
-        # Continue only when the term under the square root in the D_transmit computation is positive.
-        if mat.transmission > 0:
-            # FILL IN YOUR CODE
-                # Add transmission to the final color: (1 - k_r) * L_transmit
-                color += np.zeros(3) # REPLACE WITH YOUR CODE
+    # ----------
+    # TODO 6: TRANSMISSION
+    #
+    # If depth > 0, then cast a transmitted ray from the current intersection point
+    if depth > 0 and mat.transmission > 0:
+        # Set n1 and n2 based on whether the ray is inside or outside the object
+        n1, n2 = (mat.ior, 1.0) if ray_inside_object else (1.0, mat.ior)
+
+        # Compute the cosine of the incident angle (theta_i)
+        cos_theta_i = -ray_dir.dot(hit_norm)  # Negative because ray_dir is into the surface
+
+        # Calculate the term under the square root for Snell's Law
+        k = 1 - (n1 / n2)**2 * (1 - cos_theta_i**2)
+
+        # Continue only if the term under the square root is positive (total internal reflection check)
+        if k >= 0:
+            # Calculate the transmission direction using Snell's Law
+            D_transmit = ray_dir * n1 / n2 + hit_norm * (n1 / n2 * cos_theta_i)
+            D_transmit -= -ray_dir * np.sqrt(1 - ((n1 / n2) ** 2) * (1 - cos_theta_i ** 2))
+            D_transmit = D_transmit.normalized()
+
+            # Offset the origin to avoid self-occlusion
+            epsilon = 1e-4
+            transmit_orig = hit_loc - epsilon * hit_norm if ray_inside_object else hit_loc + epsilon * hit_norm
+
+            # Recursively trace the transmitted ray, reducing depth by 1
+            transmit_color = RT_trace_ray(scene, transmit_orig, D_transmit, lights, depth - 1)
+
+            # Add transmission to the final color: (1 - k_r) * transmission * L_transmit
+            color += (1 - reflectivity) * mat.transmission * transmit_color
+
     #
     # Re-run this script, and render the scene to check your result with Checkpoint 6.
     # ----------
