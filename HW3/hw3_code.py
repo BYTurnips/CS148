@@ -296,7 +296,7 @@ def RT_trace_ray(scene, ray_orig, ray_dir, lights, depth=0):
 
                 new_hit_loc = hit_loc + D_transmit * eps
 
-                L_transmit = RT_trace_ray(scene, hit_loc, D_transmit, lights, depth-1)
+                L_transmit = RT_trace_ray(scene, new_hit_loc, D_transmit, lights, depth-1)
 
                 color += (1-reflectivity) * mat.transmission * L_transmit
     #
