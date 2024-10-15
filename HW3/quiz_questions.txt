@@ -15,14 +15,14 @@ enough of the high-level ideas to show that you understand the approaches.
     relation of the point to the triangle vertex and assess if it intersects via each
     vertex.
 
- - Why is transforming a normal vector between object and world space different from
+2. Why is transforming a normal vector between object and world space different from
 transforming an object between those spaces?
     - An object space normal uses local axes of the object as its basis vectors but 
     in world space, the normal uses the world-space vectors as its basis. This is 
     because in world space, applying transformations will change an objects normal,
     so we need the normal vectors in world space coordinates.
 
- - Explain the idea of total internal reflection. Conceptually, when does this happen, and
+3. Explain the idea of total internal reflection. Conceptually, when does this happen, and
 what effect does it have on the transmission of light through a material?
     - This occurs when there is a transition from a higher refraction index (i.e. 
     water/glass) to a lower refraction index (i.e. air).
@@ -30,10 +30,10 @@ what effect does it have on the transmission of light through a material?
     disappears as you bend away from the normal and reach the critical angle, and makes
     it so that no light can get through so you end up not being able to see anything
     except the reflection.
-    - Effect: only reflection and no trasmitted ray.
+    - Effect: only reflection and no transmitted ray.
 
 
- - What does Beer’s Law say about light as it travels through a medium? How does the
+4. What does Beer’s Law say about light as it travels through a medium? How does the
 attenuation coefficient come into play with modifying the light intensity appropriately
 as the light travels through some distance?
     - Beer’s Law tells us that light gets absorbed and scattered over some distance 
