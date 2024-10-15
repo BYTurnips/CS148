@@ -282,7 +282,7 @@ def RT_trace_ray(scene, ray_orig, ray_dir, lights, depth=0):
         # The ray goes from n1 media to n2 media so set n1 and n2 according to ray_inside_object.
         # The IOR of the object is mat.ior, and the IOR of air is 1.
         # Continue only when the term under the square root in the D_transmit computation is positive.
-        if mat.transmission > 0:
+        if mat.transmission > 0 and depth > 0 :
             n1 = mat.ior if ray_inside_object else 1.0
             n2 = 1.0 if ray_inside_object else mat.ior
 
