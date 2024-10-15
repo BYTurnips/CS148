@@ -286,12 +286,9 @@ def RT_trace_ray(scene, ray_orig, ray_dir, lights, depth=0):
     if mat.transmission > 0:
             # FILL IN YOUR CODE
             if depth > 0:
-                if ray_inside_object:
-                    ior = mat.ior
-                else:
-                    ior = 1 / mat.ior
+                ior = mat.ior if ray_inside_object else 1 / mat.ior
                 
-                root = 1 - ior**2 * (1 - (ray_dir.dot(hit_norm)) ** 2)
+                root = 1 - ior ** 2 * (1 - (ray_dir.dot(hit_norm)) ** 2)
                 
                 if root >= 0:
                     D_transmit = ray_dir * ior - hit_norm * (ior * ray_dir.dot(hit_norm) + sqrt(root))
