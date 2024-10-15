@@ -288,13 +288,13 @@ def RT_trace_ray(scene, ray_orig, ray_dir, lights, depth=0):
 
             eta = n1/n2
             cos_i = -hit_norm.dot(ray_dir)
-            sin_t2 = eta**2*(1.0-cosi**2)
+            sin_t2 = eta**2*(1.0-cos_i**2)
 
             if sin_t2 <= 1.0:
                 cos_t = np.sqrt(1.0-sin_t2)
                 D_transmit = eta*ray_dir * hit_norm(eta*cos_i-cos_t)
 
-                new_hit_loc = hit_lloc + D_transmit * eps
+                new_hit_loc = hit_loc + D_transmit * eps
 
                 L_transmit = RT_trace_ray(scene, hit_loc, D_transmit, lights, depth-1)
 
