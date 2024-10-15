@@ -17,14 +17,18 @@ enough of the high-level ideas to show that you understand the approaches.
 
  - Why is transforming a normal vector between object and world space different from
 transforming an object between those spaces?
-    - An object space normal uses local axes of the object as its basis vectors but 
-    in world space, the normal uses the world-space vectors as its basis. This is 
-    because in world space, applying transformations will change an objects normal,
-    so we need the normal vectors in world space coordinates.
+    - Transforming a normal vector is different than transforming an object because the
+    normal vector behaves differently under transformations. For example, when you 
+    transform an object from object space to world space, you apply the transformation
+    matrix directly to the object's vertices. However, the normal vector, which represents
+    the direction perpendicular to the surface, won't undergo the same transformation. 
+    If it's transformed in the same way it won't be perpendicular to the surface anymore.
+    So, you need to apply the inverse transformation to adjust for the scaling and maintain
+    it perpendicular to the surface.
 
  - Explain the idea of total internal reflection. Conceptually, when does this happen, and
 what effect does it have on the transmission of light through a material?
-    - This occurs when there is a transition from a higher refraction index (i.e. 
+    - This occurs when there is a transition from a much higher refraction index (i.e. 
     water/glass) to a lower refraction index (i.e. air).
     - Normally, you get both a reflected and transmitted ray, but the transmitted ray 
     disappears as you bend away from the normal and reach the critical angle, and makes
