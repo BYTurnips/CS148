@@ -1,0 +1,23 @@
+You will be randomly asked one of these questions during the grading session:
+
+How does the distance between a light and an object as well as the tilt angle between
+the two affect the irradiance on the surface of the object? How does the concept of a
+tilt angle also come up for the radiance of (area) lights?
+
+
+What causes color bleeding in real life? Give a high level description of what we would
+need to do with our objects in a scene to model color bleeding
+
+
+Conceptually, what is a BRDF? How are BRDFs involved in the lighting equation?
+For instance, if the incoming radiance is white light, and the BRDF involved models a
+blue material object, what might you expect for the color of the outgoing radiance?
+
+
+What is the difference between the way we compute Gouraud shading vs the way we
+compute Phong shading? Which one of these shading techniques produces a more
+realistic looking effect, and at what cost?
+
+
+Explain the ambient, diffuse and specular components of the Phong Reflection Model.
+What does each component model visually for the shading of an object?
