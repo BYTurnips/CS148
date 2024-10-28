@@ -20,7 +20,7 @@ bl_info = {
 import bpy
 import numpy as np
 from mathutils import Vector, Matrix
-from math import sqrt, pi, sin, cos
+from math import sqrt, pi, sin, cos, acos
 
 
 def ray_cast(scene, origin, direction):
@@ -158,23 +158,22 @@ def RT_trace_ray(scene, ray_orig, ray_dir, lights, depth=0):
         #     x = Vector((0, 1, 0))
         
         # # Gram schmidt to get orthogonal basis
-        # x = (x - x.dot(z) * z).normalized()
+        # x = (x - x.dot(z) * z)
+        # x = x.normalized()
         # y = z.cross(x)
 
         # # Sample random direction using hemisphere
-        # r1 = np.random.rand()
-        # r2 = np.random.rand()
-        # theta = r1
-        # phi = r2 * 2 * np.pi
-        # rand_ray = Vector((sin(theta)*cos(theta), sin(theta) * sin(phi), cos(theta)))
+        # cos_theta = np.random.rand()        # r1
+        # sin_theta = sin(acos(cos_theta))
+        # phi = 2 * np.random.rand() * np.pi  # r2
+        # rand_ray = Vector(sin_theta * cos(phi), sin_theta * sin(phi), cos_theta)
 
         # # Transform random direction to world space 
-        # transformation_matrix = Matrix((x, y, z))
-        # global_rand_ray = transformation_matrix @ rand_ray
+        # global_rand_ray = Matrix((x, y, z)) @ rand_ray
     
         # # Recursively trace ray to get indirect diffuse color.
         # indiff_intensity = RT_trace_ray(scene, hit_loc, global_rand_ray, lights, depth-1)
-        # color += indiff_intensity * r1 * diffuse_color
+        # color += indiff_intensity * cos_theta * diffuse_color
 
         # # --------------------------------------------------------------------------------
 
@@ -222,11 +221,10 @@ def RT_render_scene(scene, width, height, depth, samples, buf):
                 # get screen space coordinate for x
                 screen_x = (x - (width / 2)) / width
 
-                # Part 1.2.1
-                screen_x += corput_x[s]
-                screen_y += corput_y[s]
-
-                ray_dir = Vector((screen_x, screen_y, -focal_length))
+                # Part 1.2.1: Added corput components
+                ray_dir = Vector((screen_x + corput_x[s], 
+                                  screen_y + corput_y[s],
+                                  -focal_length))
 
                 ray_dir.rotate(cam_orientation)
                 ray_dir = ray_dir.normalized()
