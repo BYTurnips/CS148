@@ -147,35 +147,41 @@ def RT_trace_ray(scene, ray_orig, ray_dir, lights, depth=0):
                     depth - 1,
                 )
                 color += (1 - reflectivity) * mat.transmission * transmission_color
-        
-        # # --------------------------------------------------------------------------------
-        # # Part 1.3.1: Implementing indirect diffuse (color bleeding)
-
-        # # Initialize z and x
-        # z = hit_norm
-        # x = Vector((0, 0, 1))
-        # if abs(x.dot(z)) > 0.9:
-        #     x = Vector((0, 1, 0))
-        
-        # # Gram schmidt to get orthogonal basis
-        # x = (x - x.dot(z) * z)
-        # x = x.normalized()
-        # y = z.cross(x)
-
-        # # Sample random direction using hemisphere
-        # cos_theta = np.random.rand()        # r1
-        # sin_theta = sin(acos(cos_theta))
-        # phi = 2 * np.random.rand() * np.pi  # r2
-        # rand_ray = Vector(sin_theta * cos(phi), sin_theta * sin(phi), cos_theta)
-
-        # # Transform random direction to world space 
-        # global_rand_ray = Matrix((x, y, z)) @ rand_ray
     
-        # # Recursively trace ray to get indirect diffuse color.
-        # indiff_intensity = RT_trace_ray(scene, hit_loc, global_rand_ray, lights, depth-1)
-        # color += indiff_intensity * cos_theta * diffuse_color
+        # --------------------------------------------------------------------------------
+        # Part 1.3.1: Implementing indirect diffuse (color bleeding)
 
-        # # --------------------------------------------------------------------------------
+        # Initialize z and x
+        z = hit_norm
+        x = Vector((0, 0, 1))
+        if x.dot(z) > 0.9 or x.dot(z) < -0.9:
+            x = Vector((0, 1, 0))
+        
+        # Gram schmidt to get orthogonal basis
+        x = (x - x.dot(z) * z)
+        x = x.normalized()
+        y = z.cross(x)
+
+        # Sample random direction using hemisphere
+        cos_theta = np.random.rand()        # r1
+        sin_theta = sin(acos(cos_theta))
+        phi = 2 * np.random.rand() * np.pi  # r2
+        rand_ray = Vector((sin_theta * cos(phi), sin_theta * sin(phi), cos_theta))
+
+        # Transform random direction to world space 
+        mat_transform = Matrix()
+        mat_transform[0][0:3] = x
+        mat_transform[1][0:3] = y
+        mat_transform[2][0:3] = z
+        mat_transform.transpose()
+        global_rand_ray = mat_transform @ rand_ray
+    
+        # Recursively trace ray to get indirect diffuse color.
+        indiff_intensity = RT_trace_ray(scene, hit_loc + hit_norm * eps, 
+                                        global_rand_ray, lights, depth-1)
+        color += indiff_intensity * cos_theta * diffuse_color
+
+        # --------------------------------------------------------------------------------
 
     return color
 
