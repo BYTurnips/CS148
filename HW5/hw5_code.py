@@ -239,7 +239,7 @@ def RT_render_scene(scene, width, height, depth, samples, buf):
                 sumbuf[y, x, 0:3] += RT_trace_ray(
                     scene, cam_location, ray_dir, scene_lights, depth
                 )
-                buf[y, x, 0:3] = sumbuf[y,x] / (samples + 1)
+                buf[y, x, 0:3] = sumbuf[y,x] / (s + 1)
 
                 # populate the alpha component of the buffer
                 # to make the pixel not transparent
