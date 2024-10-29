@@ -1,0 +1,17 @@
+- Explain the process of tracing or following photons as they get emitted from a light.
+How does this compare to the backward tracing process for photons, and why are both
+inefficient compared to ray tracing, despite producing potentially better visual effects?
+
+- How does bidirectional ray tracing achieve a compromise between the efficiency of ray
+tracing and better visual fidelity of tracing photons? What is indirect illumination,
+and how is it modeled in bidirectional ray tracing?
+
+- Summarize the tractability issue when doing multiple global illumination bounces. How
+can we address this issue by looking at the diffuse and specular lighting components
+separately?
+
+- What is the advantage of Monte Carlo methods for numerical integration? When might
+it be more appropriate to use e.g. Newton-Cotes instead?
+
+- What is the point of photon maps? How are they involved in gathering radiance for
+generating effects, such as caustics, indirect lighting, etc, when ray tracing?
