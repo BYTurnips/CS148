@@ -1,17 +1,46 @@
 - Explain the process of tracing or following photons as they get emitted from a light.
 How does this compare to the backward tracing process for photons, and why are both
 inefficient compared to ray tracing, despite producing potentially better visual effects?
+    - Process of Tracing Photons: Directions from a light source are chosen and photons
+    are traced to be either absorbed or reflected, until one or more hit the camera and
+    get "absorbed" by the film.
+    - Backward tracing: from aperture to light source, but if an object is hit, emit
+    photons in every direction of the hemisphere until a light source is found. The
+    created path must then emit photons to be traced in all directions, to help
+    determine brightness/color of photon on film.
+    - Both are inefficient as there are too many photons that don't make it to the aperture
+    (forward) or too many paths to trace that don't make it back to the light source 
+    (backward) 
+    - Ray Tracing just focused on backward tracing the most important rays - ie. the 
+    ones coming directly from the light source.
+
 
 - How does bidirectional ray tracing achieve a compromise between the efficiency of ray
 tracing and better visual fidelity of tracing photons? What is indirect illumination,
 and how is it modeled in bidirectional ray tracing?
+    - Combines forward and backward to create a light map, which only needs to be
+    gneerated once, regardless of the camera.
+    - Indirect illumination is the light generated from the ignored directions of
+    the hemisphere (not directly from light source)
 
 - Summarize the tractability issue when doing multiple global illumination bounces. How
 can we address this issue by looking at the diffuse and specular lighting components
 separately?
+    - The curse of dimensionality occurs when there are exponential paths of
+    light to trace.
+    - Purely diffuse allows for pre processing illumination of whole scene, and
+    specular allows for reflections to be computated dependent on the camera/view only,
+    so as to optimize the calculations needed for the light ray tracing.
 
 - What is the advantage of Monte Carlo methods for numerical integration? When might
 it be more appropriate to use e.g. Newton-Cotes instead?
+    - Monte Carlo scales well to higher dimensionality, such as 4D and 5D. Newton-
+    Cotes is more accurate generally, which is good for 2D and 3D environments.
 
 - What is the point of photon maps? How are they involved in gathering radiance for
 generating effects, such as caustics, indirect lighting, etc, when ray tracing?
+    - Photon maps store information about light in the scene, allowing for
+    different sources of light/concentrations of photons to be easily kept
+    track of, allowing for easy global illumination estimations.
+    - Especially helpful for generating effects as they can store/access 
+    this specific information effeciently and make computational efforts quicker
