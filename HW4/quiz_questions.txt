@@ -4,13 +4,13 @@ How does the distance between a light and an object as well as the tilt angle be
 the two affect the irradiance on the surface of the object? How does the concept of a
 tilt angle also come up for the radiance of (area) lights?
 
-    As the distance between the light and the surface increases, the irradiance decreases 
+    - As the distance between the light and the surface increases, the irradiance decreases 
     according to the inverse square law, meaning that irradiance drops off rapidly with greater distance.
     The tilt angle between the surface and the light source also impacts irradiance because the more a 
-    surface tilts away from the light, the less light it receives per unit area. This happens because the 
-    same amount of light is spread over a larger surface area when the surface is angled, reducing the 
-    effective irradiance. For area lights, the tilt angle also plays a significant role in 
-    determining radiance, which is the amount of light emitted from a specific direction. 
+    surface tilts away from the light, the less light it receives per unit area. 
+    - This happens because the same amount of light is spread over a larger surface area when the surface is angled, reducing the effective irradiance. 
+    - For area lights, the tilt angle also plays a significant role in determining radiance, 
+    which is the amount of light emitted from a specific direction. 
     When a surface is tilted relative to an area light, the radiance observed from that surface 
     depends on how much of the surface is "seen" by the light, and similarly, how much of the light is 
     "seen" by the surface. This affects both the light intensity perceived and the way shadows and 
@@ -20,12 +20,14 @@ tilt angle also come up for the radiance of (area) lights?
 What causes color bleeding in real life? Give a high level description of what we would
 need to do with our objects in a scene to model color bleeding
 
-    Color bleeding in real life is caused by light bouncing off one surface and 
+    - Color bleeding in real life is caused by light bouncing off one surface and 
     carrying some of the surface's color to nearby surfaces. 
     When light hits a colored object, some of the light is absorbed while the rest is reflected. 
     The reflected light carries the color of the object and can hit adjacent surfaces, 
-    causing them to take on a subtle tint of that color. To model color bleeding in a scene, 
-    we would need to simulate global illumination, where light rays bounce off surfaces multiple times. 
+    causing them to take on a subtle tint of that color. 
+    
+    - To model color bleeding in a scene, we would need to simulate global illumination, 
+    where light rays bounce off surfaces multiple times. 
     This involves calculating how light interacts with each surface, how much color is 
     absorbed or reflected, and then how the reflected light affects neighboring surfaces. 
     A key part of this is tracing the paths of light rays as they bounce around the scene, 
@@ -40,10 +42,12 @@ blue material object, what might you expect for the color of the outgoing radian
     function that describes how light is reflected off a surface. 
     It defines the relationship between incoming light and outgoing light, 
     depending on the surface properties and the angles of incidence and reflection. 
+
     The BRDF helps determine how much light is reflected in each direction and 
     what color that reflected light will be based on the material of the surface. 
     In the lighting equation, the BRDF is used to model how light interacts with a surface, 
     taking into account factors like the material's color, glossiness, or roughness. 
+
     For instance, if the incoming radiance is white light and the BRDF models a blue material, 
     we would expect the outgoing radiance to be predominantly blue. 
     This is because the blue surface would absorb most other wavelengths of light 
@@ -56,20 +60,21 @@ realistic looking effect, and at what cost?
     Gouraud shading computes lighting at the vertices of a polygon and then 
     interpolates those values across the surface of the polygon, resulting in 
     smooth but sometimes less accurate shading. Phong shading, on the other hand, 
-    computes lighting at each pixel by interpolating the surface normals across the polygon 
-    and applying the lighting equation per pixel. 
+    computes lighting at each pixel by interpolating the surface normals 
+    across the polygon and applying the lighting equation per pixel. 
+
     Phong shading produces a more realistic and smoother result, especially for specular highlights, 
     but it comes at a higher computational cost due to the per-pixel lighting calculations.
 
 Explain the ambient, diffuse and specular components of the Phong Reflection Model.
 What does each component model visually for the shading of an object?
 
-In the Phong Reflection Model, the ambient component represents the constant background light 
-that illuminates all surfaces equally, regardless of their orientation, simulating indirect light. 
-The diffuse component models light that scatters in all directions when it hits a rough surface, 
-making the object appear evenly lit and dependent on the angle between the light source and the 
-surface. The specular component represents the shiny highlights on a surface, where light is 
-reflected in a specific direction, creating bright spots that depend on the viewer's position 
-relative to the light source. 
-Visually, ambient light adds a base level of illumination, diffuse light gives the object its 
-overall shape and form, and specular light adds shininess and reflective highlights.
+    - In the Phong Reflection Model, the ambient component represents the constant background light 
+    that illuminates all surfaces equally, regardless of their orientation, simulating indirect light. 
+    The diffuse component models light that scatters in all directions when it hits a rough surface, 
+    making the object appear evenly lit and dependent on the angle between the light source and the 
+    surface. The specular component represents the shiny highlights on a surface, where light is 
+    reflected in a specific direction, creating bright spots that depend on the viewer's position 
+    relative to the light source. 
+    - Visually, ambient light adds a base level of illumination, diffuse light gives the object its 
+    overall shape and form, and specular light adds shininess and reflective highlights.
