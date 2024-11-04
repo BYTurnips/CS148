@@ -1,0 +1,34 @@
+1. What about sampling causes aliasing? What must we do before sampling for anti
+aliasing, and what visual artifact does anti-aliasing fix in the image?
+
+- Aliasing occurs when a scene is sampled at a rate insufficient to capture the detail, causing jagged edges in the image.
+- To counter this, anti-aliasing pre-processes the sampling by using techniques like supersampling or jittered sampling.
+- Anti-aliasing helps to smooth edges and reduce jaggedness, resulting in a more visually continuous and refined image.
+
+2. What causes motion blur to appear in images when we take photos with real life
+cameras? How do we modify ray tracing to account for motion blur?
+
+- Motion blur in photos occurs when the camera's exposure time overlaps with the movement of objects, causing them to appear smeared along their direction of motion. 
+- To replicate motion blur in ray tracing, we sample the scene over time by casting rays at different time intervals during the exposure period.
+
+3. What visual effect does a depth of field produce for an image? How do we modify ray
+tracing to incorporate depth of field?
+
+- Depth of field (DoF) makes parts of an image appear sharp while others are blurred, depending on their distance from the camera's focus point.
+- To add depth of field in ray tracing, we cast rays from a simulated camera lens with slight variations in their origin, focusing them on a specific focal plane.
+- This approach mimics how light rays pass through a physical lens and produce varying levels of focus in the image.
+
+4. What does it mean for light to be attenuated as it moves through a medium? How does
+the heterogeneous Beer’s Law allow us to model the attenuation of light as it moves
+through non-homogeneous media?
+
+- Attenuation refers to the gradual reduction in light intensity as it passes through a medium due to absorption and scattering. 
+- The heterogeneous Beer’s Law extends the standard model to account for varying densities and compositions within non-uniform media, allowing us to integrate over a path where the absorption coefficient changes. 
+- This results in more accurate modeling of light attenuation through complex materials like fog or murky water.
+
+5. What is the difference between out-scattering vs in-scattering? Which of these two
+concepts causes participating media like smoke and cloud to actually have shape and
+why?
+
+- Out-scattering refers to the redirection of light away from its path, reducing its intensity in a given direction, while in-scattering involves light entering a path from different directions, adding brightness. 
+- In-scattering is responsible for giving participating media like smoke and clouds their visible shape, as it contributes light to regions that would otherwise appear dark, creating depth and volume by interacting with incoming light.

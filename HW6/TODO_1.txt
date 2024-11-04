@@ -1,0 +1,62 @@
+1. Why do you think the spheres in the scene are completely black in this render
+pass, despite having color in the combined pass?
+
+The spheres have no diffuse quality (they seem to be mirror-metal and glass). 
+Therefore, the diffuse direct ray would contribute nothing, leading to black.
+
+2. Why do you think there is red and green color in this pass while the direct pass
+is only black and white?
+
+The direct pass is black and white because the light is white-colored, so any
+direct ray "hit" can only contribute white color.
+The indirect pass gains red and green colors because some of the rays bounce
+off the non-colored walls and strike the red and green walls, providing color.
+
+3. Why do you think this pass is flat shaded?
+
+Since there's no light element, this pass basically just shows the material
+colors, which in this case is homogeneous across the two walls.
+
+4. What do you think are the white spots in this pass?
+
+These show up as the super shiny light spots on the balls from a direct
+reflection of the light source. This is because they have a specular component.
+
+5. Why do you think the right-most sphere looks different in this pass compared to
+how it looks in the combined pass? Notice how it has a black center here instead
+of a gray center. Where is that black center coming from?
+
+The right-most sphere looks much more similar to the left sphere in this render
+because it does not include elements from the other passes yet (which will turn
+out to dominate the combined pass color). It has a black center here because
+we are specifically not including transmission yet; the rays from the back wall
+do not get to pass through the glass ball yet.
+
+6. What do you think it means for the right-most sphere to appear mostly gray
+compared to the fully white sphere on the left? Can you also think of a reason
+to explain the white outline around the gray sphere? (Hint: it is something you
+coded up in HW3)
+
+The left sphere is metal and will always 100% reflect all incident rays.
+The right sphere is glass and would also sometimes reflect incident rays, but
+not as much as the mirror ball. There is a white outline because the incident
+angle there between the camera and the ball surface normal is large, causing
+rays to obey total internal reflection (treating the glass as mirror).
+
+7. Why do you think this pass is completely black?
+
+As the description says, most light rays would need to transmit through a
+medium twice. Only a very thin material could get away with one transmission,
+which this glass ball clearly isn't.
+
+8. Why do you think the right-most sphere this time has a gray center when it had
+a black center in the glossy indirect pass?
+
+The transmission pass has a gray center because we're able to catch rays
+passing through the glass ball from the back wall. The glossy indirect pass
+did not allow these rays.
+
+9. Why do you think only one sphere shows up in this pass?
+
+Only one sphere (indeed, only one object in the scene) has any transmissive 
+qualities: the glass one. The mirror one only reflects and doesn't transmit.
