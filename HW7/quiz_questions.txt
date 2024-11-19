@@ -1,0 +1,35 @@
+1. What is the purpose of subdivision? Why do we need to move the vertices in the
+process after inserting new vertices?
+    - Subdivision is the dividing of polygons into smaller polygons which allows for
+    smoother curvature/surfaces.
+    - New vertices are needed to adjust for the new smoothness of the shape and
+    preserve the original's overall dimensions.
+    
+2. What is the purpose of control points when it comes to splines? What is one practical
+application of splines in computer graphics?
+    - Control points defnie the shape/curvature of a spline, which is a smooth curve that passes through
+    the control points
+    - Splines are used for defining motion paths such as for camera movement and more
+    importantly are used for applying deformations to objects to make them more realisitc
+
+3. How are implicit surfaces used to model geometry (e.g. a sphere, water, etc)? Why
+are they superior to triangle meshes for modeling something like water?
+    - Implicit surfaces use mathematical equations to model how a geometric shape's 
+    points should lie on a surface
+    - They are superior to traingle meshes for water as they allow for more continuous
+    representations without the constraints of discrete polgonal meshes and create more
+    fluid-like behavior.
+
+4. How is range scanning used to create geometry? Why might we want to use it over
+manually creating the geometry ourselves?
+    - Range scanning capture the 3D shape of real world objects by mesauring their distances
+    to surfaces
+    - It's preferred as it's more highly accurate at creating replicas and saves time 
+    over detailed manual creation.
+
+5. How does physical simulation (using Newton’s second law) differ from procedural geometry in shaping geometry? Give an example of when we would use physical simulation
+and an example of when we would use procedural geometry in computer graphics.
+- Physical simulation uses real world physics to compute how objects behave under forces based on simulations
+    rather than relying on algorithms generated using math functions
+- Physical simulations: cloth on table
+- Procedural: forest using fractals for distribution
